@@ -2,7 +2,7 @@
 
 You are faced with a security door designed by evil engineers that seem to have acquired most of their security knowledge by watching [hacking movies](https://en.wikipedia.org/wiki/Hackers_(film)).
 The eight-character password for the door is generated one character at a time by finding the [MD5](https://en.wikipedia.org/wiki/MD5) hash of some Door ID (your puzzle input) and an increasing integer index (starting with `0`).
-A hash indicates the next character in the password if its hexadecimal representation starts with five zeroes. If it does, the sixth character in the hash is the next character of the password.
+A hash indicates the next character in the password if its [hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal) representation starts with five zeroes. If it does, the sixth character in the hash is the next character of the password.
 For example, if the Door ID is `abc`:
 
 * The first index which produces a hash that starts with five zeroes is `3231929`, which we find by hashing `abc3231929`; the sixth character of the hash, and thus the first character of the password, is `1`.

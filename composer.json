@@ -6,7 +6,9 @@
     "php": "^8.2"
   },
   "autoload": {
-    "Hacking\\": "src"
+    "psr-4": {
+      "Hacking\\": "src"
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
