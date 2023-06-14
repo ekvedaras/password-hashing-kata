@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Hacking;
 
-final class Infiltrator5000 implements Algorithm
+final class Infiltrator9001 implements Algorithm
 {
     private const passwordLength = 8;
     private const interestingHashPrefix = '00000';
-    private const passwordSequencePositionInHash = 5;
+    private const sequencePositionInPasswordInHash = 5;
+    private const passwordSequencePositionInHash = 6;
 
     public function hack(DoorId $doorId): Password
     {
@@ -17,14 +18,18 @@ final class Infiltrator5000 implements Algorithm
 
         while ($password->isUnknown()) {
             $hash = MD5Hash::fromIndex($index);
+            $index = $index->next();
             if (! $hash->startsWith(self::interestingHashPrefix)) {
-                $index = $index->next();
+                continue;
+            }
+
+            $sequencePosition = $hash->characterAt(self::sequencePositionInPasswordInHash);
+            if (! is_numeric($sequencePosition) || (int) $sequencePosition >= self::passwordLength) {
                 continue;
             }
 
             $sequence = $hash->characterAt(self::passwordSequencePositionInHash);
-            $password = $password->withNextHackedSequence($sequence);
-            $index = $index->next();
+            $password = $password->withHackedSequence($sequence, (int) $sequencePosition);
         }
 
         return $password;
