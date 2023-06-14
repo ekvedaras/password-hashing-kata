@@ -40,7 +40,7 @@ final readonly class Password
     public function withHackedSequence(string $sequence, int $position): self
     {
         $newSequence = $this->value;
-        $newSequence[$position] = $sequence;
+        $newSequence[$position] = str_replace(self::mask, $sequence, $newSequence[$position]);
 
         return new self($newSequence, $this->length);
     }

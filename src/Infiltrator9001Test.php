@@ -15,5 +15,6 @@ it('correctly unlocks doors', function (DoorId $doorId, Password $expectedPasswo
     expect($unlockedDoor)->password->toEqual($expectedPassword);
 })->with([
     'abc' => [new DoorId('abc'), Password::known('05ace8e3')],
-    'cxdnnyjw' => [new DoorId('cxdnnyjw'), Password::known('999828ec')]
+    'cxdnnyjw' => [new DoorId('cxdnnyjw'), Password::known('999828ec')],
+    'wtnhxymk' => [new DoorId('wtnhxymk'), Password::known('437e60fc')],
 ]);
