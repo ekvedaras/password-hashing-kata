@@ -4,21 +4,23 @@ declare(strict_types=1);
 
 namespace Hacking;
 
+use DomainException;
+
 final readonly class LockedDoor
 {
     public function __construct(
         public DoorId $id,
-    ) {
+        private Password $password,
+    )
+    {
     }
 
-
-    public function unlock(Algorithm $algorithm): UnlockedDoor
+    public function unlock(Password $password): UnlockedDoor
     {
-        $password = $algorithm->hack($this->id);
+        if (!$this->password->equals($password)) {
+            throw new DomainException("Failed to unlock door [$this->id]. Incorrect password");
+        }
 
-        return new UnlockedDoor(
-            id: $this->id,
-            password: $password,
-        );
+        return new UnlockedDoor($this->id);
     }
 }

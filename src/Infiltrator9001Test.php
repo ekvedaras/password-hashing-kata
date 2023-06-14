@@ -6,15 +6,16 @@ use Hacking\DoorId;
 use Hacking\Infiltrator9001;
 use Hacking\LockedDoor;
 use Hacking\Password;
+use Hacking\UnlockedDoor;
 
-it('correctly unlocks doors', function (DoorId $doorId, Password $expectedPassword) {
-    $lockedDoor = new LockedDoor($doorId);
+it('correctly unlocks doors', function (LockedDoor $lockedDoor) {
     $algorithm = new Infiltrator9001();
-    $unlockedDoor = $lockedDoor->unlock($algorithm);
 
-    expect($unlockedDoor)->password->toEqual($expectedPassword);
+    $password = $algorithm->hack($lockedDoor);
+
+    expect($lockedDoor->unlock($password))->toBeInstanceOf(UnlockedDoor::class);
 })->with([
-    'abc' => [new DoorId('abc'), Password::known('05ace8e3')],
-    'cxdnnyjw' => [new DoorId('cxdnnyjw'), Password::known('999828ec')],
-    'wtnhxymk' => [new DoorId('wtnhxymk'), Password::known('437e60fc')],
+    'abc' => [new LockedDoor(new DoorId('abc'), Password::known('05ace8e3'))],
+    'cxdnnyjw' => [new LockedDoor(new DoorId('cxdnnyjw'), Password::known('999828ec'))],
+    'wtnhxymk' => [new LockedDoor(new DoorId('wtnhxymk'), Password::known('437e60fc'))],
 ]);

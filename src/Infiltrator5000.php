@@ -10,10 +10,10 @@ final class Infiltrator5000 implements Algorithm
     private const interestingHashPrefix = '00000';
     private const passwordSequencePositionInHash = 5;
 
-    public function hack(DoorId $doorId): Password
+    public function hack(LockedDoor $door): Password
     {
         $password = Password::ofLength(self::passwordLength);
-        $index = Index::first($doorId);
+        $index = Index::first($door->id);
 
         while ($password->isUnknown()) {
             $hash = MD5Hash::fromIndex($index);

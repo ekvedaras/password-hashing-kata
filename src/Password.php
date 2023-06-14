@@ -44,4 +44,9 @@ final readonly class Password
 
         return new self($newSequence, $this->length);
     }
+
+    public function equals(Password $password): bool
+    {
+        return hash_equals($this->value, $password->value);
+    }
 }

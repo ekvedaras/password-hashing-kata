@@ -6,5 +6,5 @@ namespace Hacking;
 
 interface Algorithm
 {
-    public function hack(DoorId $doorId): Password;
+    public function hack(LockedDoor $door): Password;
 }

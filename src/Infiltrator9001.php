@@ -11,10 +11,10 @@ final class Infiltrator9001 implements Algorithm
     private const sequencePositionInPasswordInHash = 5;
     private const passwordSequencePositionInHash = 6;
 
-    public function hack(DoorId $doorId): Password
+    public function hack(LockedDoor $door): Password
     {
         $password = Password::ofLength(self::passwordLength);
-        $index = Index::first($doorId);
+        $index = Index::first($door->id);
 
         while ($password->isUnknown()) {
             $hash = MD5Hash::fromIndex($index);
